@@ -13,11 +13,11 @@ If you want to run the rate limiter tests, you need to first install pytest. Thi
 
 # Implementation Decisions
 - I decided to lazily update the tokens in a bucket. A user's buckets is filled to its theoretical level based on the timestamp of the last refill only when the user attempts to make a request.
-- Bucket information is stored by using a 2d array. The first value represents the number of tokens and the second value represents the timestamp of the last refill. I inniteally implemented this with a tuple. The downside is that tuples are immutable, so changing a value means creating a new tuple in memory and then storing a refrence to it. As such, I switched to a 2d.
+- Bucket information is stored by using a 2d array. The first value represents the number of tokens and the second value represents the timestamp of the last refill. I initially implemented this with a tuple. The downside is that tuples are immutable, so changing a value means creating a new tuple in memory and then storing a reference to it. As such, I switched to a 2d.
 - I initially implemented my rate limiter with time(). I then found out that time() has the potential to go backwards under numerous circumstances whereas monotonic() doesn't. As such, I opted to use monotonic() instead.
 
 # Sources
 - https://youtu.be/MIJFyUPG4Z4?si=ak6OIvquhMLsU7I9
 - https://www.youtube.com/watch?v=mQCJJqUfn9Y
 - https://www.youtube.com/watch?v=YXkOdWBwqaA
-- https://www.w3schools.com/python/ref_module_time.asp
+- https://www.w3schools.com/python/ref_module_time.asp 
